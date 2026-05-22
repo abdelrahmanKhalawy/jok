@@ -1,0 +1,546 @@
+<!doctype html>
+
+<html dir="rtl" lang="ar">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>20</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&amp;family=Be+Vietnam+Pro:wght@400;500;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-secondary-fixed-variant": "#4d4800",
+              secondary: "#676000",
+              "surface-container-lowest": "#ffffff",
+              "tertiary-fixed-dim": "#dfb7ff",
+              surface: "#f8f9fa",
+              "on-primary": "#ffffff",
+              "on-primary-fixed-variant": "#880068",
+              "on-primary-container": "#730058",
+              "on-secondary-fixed": "#1f1c00",
+              "surface-container-highest": "#e1e3e4",
+              "on-background": "#191c1d",
+              "surface-tint": "#a72683",
+              "inverse-surface": "#2e3132",
+              "surface-container-high": "#e7e8e9",
+              "tertiary-fixed": "#f1daff",
+              "secondary-fixed-dim": "#d3ca61",
+              "primary-fixed": "#ffd8eb",
+              "on-secondary": "#ffffff",
+              background: "#f8f9fa",
+              "on-primary-fixed": "#3b002c",
+              "on-tertiary-container": "#5a0095",
+              "surface-container": "#edeeef",
+              "on-surface": "#191c1d",
+              "surface-container-low": "#f3f4f5",
+              "on-error-container": "#93000a",
+              "tertiary-container": "#c989ff",
+              "secondary-container": "#efe67a",
+              "surface-dim": "#d9dadb",
+              "surface-variant": "#e1e3e4",
+              "on-surface-variant": "#54414b",
+              "on-secondary-container": "#6d6600",
+              "outline-variant": "#dabfcc",
+              "on-tertiary-fixed": "#2d004f",
+              "primary-fixed-dim": "#ffaedc",
+              "error-container": "#ffdad6",
+              error: "#ba1a1a",
+              "on-tertiary": "#ffffff",
+              "on-error": "#ffffff",
+              primary: "#a72683",
+              "inverse-primary": "#ffaedc",
+              "secondary-fixed": "#efe67a",
+              "on-tertiary-fixed-variant": "#6b00b0",
+              tertiary: "#852fca",
+              "surface-bright": "#f8f9fa",
+              "primary-container": "#ff71ce",
+              "inverse-on-surface": "#f0f1f2",
+              outline: "#87717c",
+            },
+            borderRadius: {
+              DEFAULT: "1rem",
+              lg: "2rem",
+              xl: "3rem",
+              full: "9999px",
+            },
+            spacing: {
+              unit: "8px",
+              "card-gap": "2rem",
+              "container-max": "600px",
+              "section-padding": "4rem",
+              gutter: "1.5rem",
+            },
+            fontFamily: {
+              "display-lg-mobile": ["Plus Jakarta Sans"],
+              "headline-md": ["Plus Jakarta Sans"],
+              "label-bold": ["Plus Jakarta Sans"],
+              "body-lg": ["Be Vietnam Pro"],
+              "body-md": ["Be Vietnam Pro"],
+              "display-lg": ["Plus Jakarta Sans"],
+              "headline-md-mobile": ["Plus Jakarta Sans"],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+        height: 100vh;
+        width: 100vw;
+        font-family: "Plus Jakarta Sans", sans-serif;
+        background: linear-gradient(
+          45deg,
+          #f8f9fa 0%,
+          #ffedf7 50%,
+          #f0e6ff 100%
+        );
+      }
+
+      .gradient-mesh {
+        position: fixed;
+        inset: 0;
+        z-index: -1;
+        background-image:
+          radial-gradient(
+            at 0% 0%,
+            rgba(255, 113, 206, 0.15) 0px,
+            transparent 50%
+          ),
+          radial-gradient(
+            at 100% 0%,
+            rgba(133, 47, 202, 0.12) 0px,
+            transparent 50%
+          ),
+          radial-gradient(
+            at 50% 100%,
+            rgba(239, 230, 122, 0.12) 0px,
+            transparent 50%
+          );
+      }
+
+      .floating-header {
+        position: fixed;
+        top: 2rem;
+        left: 2rem;
+        z-index: 100;
+        animation: bob 4s ease-in-out infinite;
+      }
+
+      @keyframes bob {
+        0%,
+        100% {
+          transform: translateY(0) rotate(-1deg);
+        }
+        50% {
+          transform: translateY(-15px) rotate(1deg);
+        }
+      }
+
+      .runaway-btn {
+        position: fixed;
+        z-index: 50;
+        transition: transform 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        pointer-events: auto;
+        will-change: left, top;
+      }
+
+      .grand-prize-circle {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 280px;
+        height: 280px;
+        background: radial-gradient(
+          circle,
+          rgba(255, 113, 206, 0.2) 0%,
+          transparent 70%
+        );
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        animation: pulse-glow 3s infinite;
+      }
+
+      @keyframes pulse-glow {
+        0%,
+        100% {
+          transform: translate(-50%, -50%) scale(1);
+          opacity: 0.5;
+        }
+        50% {
+          transform: translate(-50%, -50%) scale(1.15);
+          opacity: 0.8;
+        }
+      }
+
+      .btn-truth {
+        position: relative;
+        z-index: 60;
+        box-shadow: 0 20px 40px rgba(167, 38, 131, 0.3);
+      }
+
+      .parallax-emoji {
+        position: fixed;
+        pointer-events: none;
+        z-index: -1;
+        font-size: 2rem;
+        opacity: 0.4;
+      }
+
+      .confetti-particle {
+        position: fixed;
+        pointer-events: none;
+        z-index: 2000;
+      }
+
+      .bubble-popup {
+        position: fixed;
+        padding: 8px 16px;
+        background: white;
+        border: 2px solid #ff71ce;
+        border-radius: 9999px;
+        font-size: 14px;
+        font-weight: bold;
+        color: #a72683;
+        pointer-events: none;
+        z-index: 101;
+        animation: popAndFade 0.6s forwards;
+      }
+
+      @keyframes popAndFade {
+        0% {
+          transform: scale(0) translateY(0);
+          opacity: 0;
+        }
+        50% {
+          transform: scale(1.2) translateY(-40px);
+          opacity: 1;
+        }
+        100% {
+          transform: scale(1) translateY(-80px);
+          opacity: 0;
+        }
+      }
+
+      .celebration-overlay {
+        position: fixed;
+        inset: 0;
+        background: linear-gradient(135deg, #ff71ce 0%, #a72683 100%);
+        z-index: 1500;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.5s ease;
+      }
+
+      #roast-modal {
+        transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      }
+    </style>
+  </head>
+  <body class="bg-surface text-on-surface">
+    <div class="gradient-mesh"></div>
+    <!-- Branding -->
+    <div
+      class="fixed top-6 right-6 z-[100] font-extrabold text-2xl text-primary tracking-tighter"
+    >
+      خلفاوي عم هديل
+    </div>
+    <!-- Header Section -->
+    <header class="floating-header text-right">
+      <div
+        class="bg-white/80 backdrop-blur-md p-6 rounded-full shadow-xl border border-primary/20"
+      >
+        <h1
+          class="text-xl md:text-2xl font-bold text-primary flex items-center gap-3"
+        >
+          <span class="material-symbols-outlined text-3xl">school</span>
+          بش هديل عادل ابو الفتوح طنطاوي خلفاوي عمك
+        </h1>
+        <p class="text-on-surface-variant font-medium mt-1 pr-11">
+          جبتي كام في الامتحان؟
+        </p>
+      </div>
+    </header>
+    <!-- Parallax Background Elements -->
+    <div id="parallax-container"></div>
+    <!-- Main Game Area -->
+    <main class="relative w-screen h-screen">
+      <!-- The Target -->
+      <div class="grand-prize-circle">
+        <button
+          class="btn-truth w-40 h-40 rounded-full bg-primary text-on-primary flex flex-col items-center justify-center transition-all hover:scale-110 active:scale-95 group"
+          id="btn-20"
+        >
+          <span class="text-sm font-bold mb-1 opacity-70">الحقيقة</span>
+          <span class="text-3xl font-extrabold">20 / 40</span>
+          <div
+            class="absolute -bottom-4 bg-secondary text-on-secondary text-[10px] px-2 py-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+          >
+            خلفاوي عمك!
+          </div>
+        </button>
+      </div>
+      <!-- The Runaway Buttons (Initially random) -->
+      <button
+        class="runaway-btn bg-white border-2 border-primary/20 px-8 py-4 rounded-full shadow-lg font-bold text-xl hover:border-primary"
+        id="btn-40"
+      >
+        40 / 40
+      </button>
+      <button
+        class="runaway-btn bg-white border-2 border-primary/20 px-8 py-4 rounded-full shadow-lg font-bold text-xl hover:border-primary"
+        id="btn-25"
+      >
+        25 / 40
+      </button>
+
+      <button
+        class="runaway-btn bg-white border-2 border-primary/20 px-8 py-4 rounded-full shadow-lg font-bold text-xl hover:border-primary"
+        id="btn-35"
+      >
+        35 / 40
+      </button>
+      <button
+        class="runaway-btn bg-white border-2 border-primary/20 px-8 py-4 rounded-full shadow-lg font-bold text-xl hover:border-primary"
+        id="btn-30"
+      >
+        30 / 40
+      </button>
+    </main>
+    <!-- Roast Modal Overlay -->
+    <div
+      class="fixed inset-0 z-[2001] flex items-center justify-center bg-black/60 backdrop-blur-sm opacity-0 invisible"
+      id="roast-modal"
+    >
+      <div
+        class="bg-white p-8 rounded-full w-[450px] aspect-square flex flex-col items-center justify-center text-center shadow-2xl border-8 border-primary transform scale-50"
+        id="modal-content"
+      >
+        <span
+          class="material-symbols-outlined text-7xl text-primary mb-4 animate-bounce"
+          >sentiment_very_dissatisfied</span
+        >
+        <h2 class="text-2xl font-bold text-primary mb-2">خلفاوي عمك!!!</h2>
+        <p
+          class="text-on-surface-variant mb-6 px-4 leading-relaxed"
+          id="roast-message"
+        ></p>
+        <button
+          class="bg-primary text-on-primary px-8 py-3 rounded-full font-bold hover:bg-primary-container transition-colors"
+          onclick="closeModal()"
+        >
+          خلاص تبت.. 🤐
+        </button>
+      </div>
+    </div>
+    <div class="celebration-overlay" id="celebration-overlay"></div>
+    <script>
+      const runawayIds = ["btn-40", "btn-35", "btn-30", "btn-25"];
+      const teaserMessages = [
+        "😜",
+        "لأ طبعاً!",
+        "هيهيهي",
+        "خلفاوي عمك!",
+        "في المشمش",
+        "جربي تاني",
+        "خلفاوي عمك!",
+        "خلفاوي عمك!",
+        "خلفاوي عمك!",
+        "خلفاوي عمك!",
+      ];
+      const roastMessages = [
+        "مبروك الـ ٢٠ يا دحيحة! نص الدرجة ضاع في الزحمة؟ 😂 و خلفاوي عمك",
+        "يا هديل.. دي درجة تتروزت عليها في التاريخ! بس يلا.. أهم حاجة الأخلاق 🥤 و خلفاوي عمك",
+        "خلفاوي عمك عادي ",
+        "٢٠ من ٤٠؟ ده انتي كدة عبقرية بس في الاتجاه الغلط خالص! 🏃‍♀️💨 و خلفاوي عمك",
+        "الصدق حلو يا هديل.. بس الـ ٢٠ دي محتاجة واسطة عشان نعديها! 🤡 و خلفاوي عمك",
+      ];
+
+      const buttons = runawayIds.map((id) => ({
+        element: document.getElementById(id),
+        x: Math.random() * (window.innerWidth - 100),
+        y: Math.random() * (window.innerHeight - 100),
+        vx: (Math.random() - 0.5) * 2,
+        vy: (Math.random() - 0.5) * 2,
+      }));
+
+      // Initial setup for buttons
+      buttons.forEach((btn) => {
+        btn.element.style.left = `${btn.x}px`;
+        btn.element.style.top = `${btn.y}px`;
+      });
+
+      // Parallax Background Emojis
+      const emojis = ["🎓", "📚", "🤣", "📝", "✨", "🧠", "🏃‍♀️"];
+      const parallaxContainer = document.getElementById("parallax-container");
+      for (let i = 0; i < 15; i++) {
+        const span = document.createElement("span");
+        span.className = "parallax-emoji";
+        span.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+        span.style.left = Math.random() * 100 + "vw";
+        span.style.top = Math.random() * 100 + "vh";
+        span.dataset.speed = Math.random() * 0.05 + 0.02;
+        parallaxContainer.appendChild(span);
+      }
+
+      window.addEventListener("mousemove", (e) => {
+        const mouseX = e.clientX;
+        const mouseY = e.clientY;
+
+        // Parallax movement
+        document.querySelectorAll(".parallax-emoji").forEach((emoji) => {
+          const speed = emoji.dataset.speed;
+          const x = (window.innerWidth / 2 - mouseX) * speed;
+          const y = (window.innerHeight / 2 - mouseY) * speed;
+          emoji.style.transform = `translate(${x}px, ${y}px)`;
+        });
+
+        // Runaway logic
+        buttons.forEach((btn) => {
+          const rect = btn.element.getBoundingClientRect();
+          const centerX = rect.left + rect.width / 2;
+          const centerY = rect.top + rect.height / 2;
+          const dist = Math.hypot(mouseX - centerX, mouseY - centerY);
+
+          if (dist < 180) {
+            // Explode away from mouse
+            const angle = Math.atan2(centerY - mouseY, centerX - mouseX);
+            const force = (180 - dist) / 10;
+            btn.vx += Math.cos(angle) * force;
+            btn.vy += Math.sin(angle) * force;
+
+            if (Math.random() > 0.95) showTeaserBubble(centerX, centerY);
+          }
+        });
+      });
+
+      // Physics Loop
+      function update() {
+        buttons.forEach((btn) => {
+          btn.x += btn.vx;
+          btn.y += btn.vy;
+
+          // Friction
+          btn.vx *= 0.92;
+          btn.vy *= 0.92;
+
+          // Wall Bouncing
+          const rect = btn.element.getBoundingClientRect();
+          if (btn.x < 10) {
+            btn.x = 10;
+            btn.vx *= -1.5;
+          }
+          if (btn.x + rect.width > window.innerWidth - 10) {
+            btn.x = window.innerWidth - rect.width - 10;
+            btn.vx *= -1.5;
+          }
+          if (btn.y < 10) {
+            btn.y = 10;
+            btn.vy *= -1.5;
+          }
+          if (btn.y + rect.height > window.innerHeight - 10) {
+            btn.y = window.innerHeight - rect.height - 10;
+            btn.vy *= -1.5;
+          }
+
+          btn.element.style.left = `${btn.x}px`;
+          btn.element.style.top = `${btn.y}px`;
+          btn.element.style.transform = `rotate(${btn.vx * 2}deg)`;
+        });
+        requestAnimationFrame(update);
+      }
+      update();
+
+      function showTeaserBubble(x, y) {
+        const bubble = document.createElement("div");
+        bubble.className = "bubble-popup";
+        bubble.innerText =
+          teaserMessages[Math.floor(Math.random() * teaserMessages.length)];
+        bubble.style.left = x + "px";
+        bubble.style.top = y + "px";
+        document.body.appendChild(bubble);
+        setTimeout(() => bubble.remove(), 600);
+      }
+
+      // Truth Button Action
+      const truthBtn = document.getElementById("btn-20");
+      truthBtn.addEventListener("click", () => {
+        document.getElementById("celebration-overlay").style.opacity = "1";
+        createConfetti(150);
+        setTimeout(() => {
+          const randomMsg =
+            roastMessages[Math.floor(Math.random() * roastMessages.length)];
+          document.getElementById("roast-message").innerText = randomMsg;
+          const modal = document.getElementById("roast-modal");
+          modal.classList.remove("invisible", "opacity-0");
+          document.getElementById("modal-content").classList.remove("scale-50");
+          document.getElementById("modal-content").classList.add("scale-100");
+        }, 300);
+      });
+
+      function closeModal() {
+        document
+          .getElementById("roast-modal")
+          .classList.add("invisible", "opacity-0");
+        document.getElementById("modal-content").classList.remove("scale-100");
+        document.getElementById("modal-content").classList.add("scale-50");
+        document.getElementById("celebration-overlay").style.opacity = "0";
+      }
+
+      function createConfetti(count) {
+        const colors = ["#ff71ce", "#a72683", "#852fca", "#efe67a", "#ffffff"];
+        for (let i = 0; i < count; i++) {
+          const p = document.createElement("div");
+          p.className = "confetti-particle";
+          const size = Math.random() * 10 + 5 + "px";
+          p.style.width = size;
+          p.style.height = size;
+          p.style.backgroundColor =
+            colors[Math.floor(Math.random() * colors.length)];
+          p.style.left = "50%";
+          p.style.top = "50%";
+          p.style.borderRadius = "2px";
+          document.body.appendChild(p);
+
+          const angle = Math.random() * Math.PI * 2;
+          const velocity = 5 + Math.random() * 25;
+          const tx = Math.cos(angle) * (200 + Math.random() * 800);
+          const ty = Math.sin(angle) * (200 + Math.random() * 800);
+
+          p.animate(
+            [
+              {
+                transform: "translate(-50%, -50%) scale(1) rotate(0deg)",
+                opacity: 1,
+              },
+              {
+                transform: `translate(${tx}px, ${ty}px) scale(0) rotate(${Math.random() * 1000}deg)`,
+                opacity: 0,
+              },
+            ],
+            {
+              duration: 1500 + Math.random() * 1000,
+              easing: "cubic-bezier(0.1, 0.8, 0.3, 1)",
+              fill: "forwards",
+            },
+          ).onfinish = () => p.remove();
+        }
+      }
+    </script>
+  </body>
+</html>
